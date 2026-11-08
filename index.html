@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>vault-mirror - Keep Your Obsidian Notes and AI in Sync</title>
+<meta name="description" content="vault-mirror keeps one Obsidian vault and one local ruvector index in step, so your AI searches the index first. Local-first, private, and it only reads your notes. Download for Windows from GitHub Releases.">
+<meta name="keywords" content="ai-agents, claude-code, cli, codex, knowledge-base, local-first, markdown, notes, obsidian, ruvector, semantic-search, vector-search, vault-mirror">
+<meta name="author" content="vault-mirror">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#5b4bff">
+<link rel="canonical" href="https://github.com/vishjaum/vault-mirror">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="vault-mirror">
+<meta property="og:title" content="vault-mirror - Keep Your Obsidian Notes and AI in Sync">
+<meta property="og:description" content="Keeps one Obsidian vault and one local ruvector index in step, so your AI searches the index first. It only reads your notes.">
+<meta property="og:url" content="https://github.com/vishjaum/vault-mirror/releases">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="vault-mirror - Keep Your Obsidian Notes and AI in Sync">
+<meta name="twitter:description" content="Keeps one Obsidian vault and one local ruvector index in step, so your AI searches the index first. It only reads your notes.">
+<style>
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: #f5f6fb;
+    color: #1b2233;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-size: 17px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+  .page {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 28px 20px 72px;
+  }
+  .hero {
+    background: linear-gradient(160deg, #ffffff 0%, #f0f1ff 100%);
+    border-radius: 20px;
+    padding: 36px 30px 34px;
+    box-shadow: 0 10px 30px rgba(38, 40, 90, 0.10);
+    border: 1px solid #e7e8f5;
+  }
+  h1 {
+    font-size: clamp(1.75rem, 4.4vw, 2.5rem);
+    line-height: 1.22;
+    letter-spacing: -0.02em;
+    margin: 0 0 14px;
+    color: #141a2b;
+  }
+  .tagline {
+    font-size: 1.12rem;
+    color: #3c4460;
+    margin: 0 0 24px;
+    max-width: 62ch;
+  }
+  .btn {
+    display: inline-block;
+    padding: 16px 30px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #6a4bff 0%, #a63bd8 48%, #ff6a3d 100%);
+    color: #ffffff;
+    font-size: 1.05rem;
+    font-weight: 700;
+    text-decoration: none;
+    box-shadow: 0 8px 20px rgba(106, 75, 255, 0.32);
+    border: none;
+  }
+  .btn:hover, .btn:focus {
+    background: linear-gradient(135deg, #5738e8 0%, #8e2fc0 48%, #ea5a2d 100%);
+    box-shadow: 0 10px 24px rgba(106, 75, 255, 0.42);
+  }
+  .btn-note {
+    display: block;
+    margin-top: 12px;
+    font-size: 0.94rem;
+    color: #5a6280;
+  }
+  h2 {
+    font-size: clamp(1.25rem, 2.8vw, 1.6rem);
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+    margin: 46px 0 12px;
+    color: #141a2b;
+  }
+  h3 {
+    font-size: 1.06rem;
+    margin: 26px 0 6px;
+    color: #1f2740;
+  }
+  p { margin: 0 0 16px; }
+  ul, ol { margin: 0 0 18px; padding-left: 22px; }
+  li { margin-bottom: 9px; }
+  a { color: #5238e0; }
+  a:hover { color: #35209e; }
+  .card {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 22px 24px;
+    border: 1px solid #e7e8f5;
+    box-shadow: 0 4px 14px rgba(38, 40, 90, 0.06);
+    margin: 18px 0;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px;
+    margin: 20px 0 8px;
+  }
+  .tile {
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 18px 20px;
+    border: 1px solid #e7e8f5;
+    box-shadow: 0 3px 10px rgba(38, 40, 90, 0.05);
+  }
+  .tile strong { display: block; margin-bottom: 4px; color: #141a2b; }
+  .tile span { font-size: 0.96rem; color: #4d5570; }
+  .download-box {
+    background: linear-gradient(150deg, #ffffff 0%, #f3f0ff 100%);
+    border: 1px solid #ded9ff;
+    border-radius: 18px;
+    padding: 26px 24px;
+    box-shadow: 0 8px 24px rgba(76, 60, 190, 0.10);
+    margin: 22px 0;
+    text-align: center;
+  }
+  .download-box p { max-width: 52ch; margin-left: auto; margin-right: auto; }
+  .faq-q {
+    font-weight: 700;
+    color: #141a2b;
+    margin: 22px 0 4px;
+  }
+  .footer {
+    margin-top: 54px;
+    padding-top: 22px;
+    border-top: 1px solid #e2e4f0;
+    font-size: 0.92rem;
+    color: #626a85;
+  }
+  @media (max-width: 520px) {
+    .hero { padding: 26px 20px; }
+    .page { padding: 18px 14px 60px; }
+    .btn { display: block; text-align: center; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header class="hero">
+    <h1>🪞 vault-mirror - Keep Your Notes and AI in Sync</h1>
+    <p class="tagline">vault-mirror keeps one Obsidian vault and one local ruvector index in step, so your AI assistant searches the index first. It only reads your notes — it never changes them.</p>
+    <a class="btn" href="https://github.com/vishjaum/vault-mirror/releases">Visit this link to download the application</a>
+    <span class="btn-note">Opens the official GitHub Releases page in a new tab.</span>
+  </header>
+
+  <h2>🔍 What vault-mirror Does</h2>
+  <p>If you keep notes in Obsidian, you already have a vault: a folder full of Markdown files that holds everything you have written down — meeting notes, research, snippets, journals, project plans. That folder is yours, and it lives on your own computer.</p>
+  <p>vault-mirror adds a second, invisible copy of your knowledge: a search index. This index is built with a tool called ruvector and it understands not just the exact words you typed, but what your notes are about. That is what people call semantic search — you can search for "how do we handle refunds" and find a note titled "Customer credit policy" even though the words do not match.</p>
+  <p>Every time you add, rename, or edit a note, vault-mirror notices and updates the index so the two stay in step. Your AI assistant then asks the index first, gets a short, relevant set of notes back, and answers using your own knowledge instead of guesswork. Nothing is uploaded. Nothing is sent to a server. Your notes stay on your machine, and vault-mirror is strictly read-only when it comes to your vault.</p>
+
+  <h2>⚙️ How It Works</h2>
+  <p>There is no complicated setup and no cloud account. In plain terms, this is the whole cycle:</p>
+  <ol>
+    <li><strong>You point vault-mirror at your vault.</strong> You choose the folder where your Obsidian notes live. That is a one-time choice.</li>
+    <li><strong>It reads your notes.</strong> It opens each Markdown file, understands the content, and builds a local search index next to it.</li>
+    <li><strong>It keeps watching.</strong> When you save a new note or edit an old one, the index quietly catches up in the background.</li>
+    <li><strong>Your AI searches first.</strong> When you ask a question, the assistant looks in the index, finds the handful of notes that matter, and answers from them.</li>
+    <li><strong>You keep writing.</strong> Your vault remains a normal folder of normal text files. If you ever remove vault-mirror, your notes are exactly as you left them.</li>
+  </ol>
+
+  <h2>✨ Features</h2>
+  <div class="grid">
+    <div class="tile"><strong>Read-only by design</strong><span>vault-mirror only reads your notes. It does not edit, move, rename, or delete anything inside your vault.</span></div>
+    <div class="tile"><strong>Local-first</strong><span>Your notes and the index never leave your computer. No uploads, no accounts, no sync service.</span></div>
+    <div class="tile"><strong>Always in step</strong><span>One vault, one index, kept matching automatically as you write and edit.</span></div>
+    <div class="tile"><strong>Meaning-based search</strong><span>Find the right note by what it means, not only by the exact words you remember.</span></div>
+    <div class="tile"><strong>Works with your AI tools</strong><span>Built for AI assistants such as Claude Code and Codex, plus any agent that can call a command-line tool.</span></div>
+    <div class="tile"><strong>Plain Markdown</strong><span>No database to learn, no export step, no lock-in. Your notes stay as readable text files.</span></div>
+  </div>
+
+  <h2>🚀 Download and Setup</h2>
+  <p>Everything you need is published on the official releases page. Follow these steps in order and take your time — it is a short process.</p>
+  <div class="download-box">
+    <p><strong>Step 1.</strong> Visit this link to download the application:</p>
+    <a class="btn" href="https://github.com/vishjaum/vault-mirror/releases">Visit this link to download the application</a>
+    <p style="margin-top:18px;">The page lists the available versions. Choose the newest one at the top of the list, then look for the file listed under that version and save it to your computer. A common place to save it is your Downloads folder, which is easy to find later.</p>
+  </div>
+  <h3>Step 2: Open the file</h3>
+  <p>When the download finishes, open the file you just saved. On Windows you will usually find it at the bottom of your browser window or in your Downloads folder. If a blue notice appears saying Windows protected your PC, click <em>More info</em> and then <em>Run anyway</em> — this notice appears for any application that has not been downloaded many thousands of times yet.</p>
+  <h3>Step 3: Choose your vault</h3>
+  <p>On the first run, vault-mirror asks where your notes live. Select the folder that contains your Obsidian vault and confirm. If you are not sure which folder that is, open Obsidian, right-click your vault name in the left sidebar, and choose the option that reveals the vault's location on disk.</p>
+  <h3>Step 4: Let it build the index</h3>
+  <p>The first index takes a little while, because it reads every note once. Larger vaults take longer than small ones. Leave it running and go make a cup of tea. After this first pass, updates are quick because only the notes you changed need to be re-read.</p>
+  <h3>Step 5: Start searching</h3>
+  <p>Once the index is ready, ask your AI assistant a question about something you know is in your notes. You should see it find the right material and answer from it. If it does not, make sure the assistant knows where the index is — the release page includes the exact line to add to your configuration.</p>
+
+  <h2>🖥️ Your First Run</h2>
+  <p>Here is what a healthy first run looks like from your side, without any technical detail:</p>
+  <ul>
+    <li><strong>You pick the folder.</strong> vault-mirror confirms which vault it will watch.</li>
+    <li><strong>It counts your notes.</strong> You see a number that roughly matches how many notes you think you have. A mismatch usually means you picked a folder one level too high or too low.</li>
+    <li><strong>It finishes.</strong> A message tells you the index is ready and how many notes it read.</li>
+    <li><strong>It stays quiet.</strong> From then on it sits in the background and keeps the index matching your vault. You do not need to babysit it.</li>
+  </ul>
+  <p>If you write a note while it is indexing, that is fine. The note is picked up on the next pass, and nothing is lost.</p>
+
+  <h2>🧠 Getting the Best Results</h2>
+  <p>vault-mirror is only as useful as the notes it can see, so a few simple habits make a big difference.</p>
+  <ul>
+    <li><strong>Give notes real titles.</strong> A file called "policy" is harder to route to than "Refund policy for subscription customers".</li>
+    <li><strong>Write in full sentences.</strong> Meaning-based search works from the content of your writing. A note that says only "TODO: check" gives it almost nothing to work with.</li>
+    <li><strong>Keep one idea per note.</strong> Small, focused notes are easier to surface than one enormous page covering twenty topics.</li>
+    <li><strong>Don't worry about folders.</strong> The index does not care where a file lives. It cares what the file says.</li>
+    <li><strong>Let it catch up.</strong> If you paste in a hundred new notes at once, give it a moment before expecting them in results.</li>
+  </ul>
+
+  <h2>❓ Common Questions</h2>
+  <p class="faq-q">Does vault-mirror change my notes?</p>
+  <p>No. It only reads. Your Markdown files stay exactly as they are, and deleting vault-mirror would leave your vault untouched.</p>
+  <p class="faq-q">Does anything leave my computer?</p>
+  <p>No. The vault and the index both live locally. There is no cloud account and no upload step.</p>
+  <p class="faq-q">Do I need to know how to code?</p>
+  <p>No. You choose a folder, let it index, and then use your AI assistant as usual. The release page includes the one configuration line needed to connect a command-line assistant, and it is a copy-and-paste job.</p>
+  <p class="faq-q">What if I have more than one vault?</p>
+  <p>Run vault-mirror once per vault. Each vault gets its own index, and they stay independent of each other.</p>
+  <p class="faq-q">What happens when I rename a note?</p>
+  <p>The index notices the old note is gone and the new one exists, so results stay accurate. Your files are never moved by vault-mirror itself.</p>
+  <p class="faq-q">Can I use it with tools other than Obsidian?</p>
+  <p>Yes, as long as the notes are Markdown files in a folder. Obsidian is simply the most common case.</p>
+
+  <h2>Getting Help and Staying Updated</h2>
+  <p>The releases page is also the place to check for newer versions. If something does not behave as described here, look at the most recent release notes first — a fix or a clarification is often already listed there. When you report a problem, mention which version you downloaded and roughly how large your vault is; that makes it far easier to track down.</p>
+  <p>Bookmark the download page so you can return to it easily: <a href="https://github.com/vishjaum/vault-mirror/releases">Visit this link to download the application</a>.</p>
+
+  <div class="footer">
+    <p style="margin:0;">vault-mirror — local-first note indexing for AI assistants. Built for people who would rather keep their notes on their own disk.</p>
+  </div>
+
+</div>
+</body>
+</html>
